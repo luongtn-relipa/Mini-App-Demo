@@ -3,9 +3,9 @@ import { useTonConnect } from "../hooks/useTonConnect";
 import { JsonContainer } from "./styled/styled";
 
 const WalletInfo: React.FC = () => {
-  const { connected, wallet, network, proof } = useTonConnect();
+  const { account, tonProof } = useTonConnect();
 
-  if (!connected) {
+  if (!account) {
     return <h3>Not connected</h3>;
   }
 
@@ -21,7 +21,7 @@ const WalletInfo: React.FC = () => {
         }}
       >
         <JsonContainer>
-          {JSON.stringify({ wallet, network, connected, proof }, null, 2)}
+          {JSON.stringify({ account, tonProof }, null, 2)}
         </JsonContainer>
       </pre>
     </div>

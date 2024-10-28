@@ -1,13 +1,11 @@
-import { CHAIN, TonProofItemReply } from "@tonconnect/protocol";
+import { TonProofItemReply } from "@tonconnect/protocol";
 import { Sender, SenderArguments } from "ton-core";
-import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
+import { Account, useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 
 export function useTonConnect(): {
   sender: Sender;
-  connected: boolean;
-  wallet: string | null;
-  network: CHAIN | null;
-  proof: TonProofItemReply | null;
+  account: Account | null;
+  tonProof: TonProofItemReply | null;
 } {
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
@@ -27,9 +25,7 @@ export function useTonConnect(): {
         });
       },
     },
-    connected: !!wallet?.account.address,
-    wallet: wallet?.account.address ?? null,
-    network: wallet?.account.chain ?? null,
-    proof: wallet?.connectItems?.tonProof ?? null,
+    account: wallet?.account ?? null,
+    tonProof: wallet?.connectItems?.tonProof ?? null,
   };
 }
